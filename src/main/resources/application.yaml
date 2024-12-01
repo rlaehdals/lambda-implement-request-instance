@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: request-instance
+
+cloud:
+  aws:
+    credentials:
+      access-key:
+      secret-key:

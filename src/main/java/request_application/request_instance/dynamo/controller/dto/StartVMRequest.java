@@ -6,11 +6,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResourceRequest {
+public class StartVMRequest {
 
     private Integer requestMemory;
     private String architect;
     private String language;
-    private String codeLocation;
+    private String arn;
+    private String bucketName;
+    private String filePath;
+    private String env;
 
 }

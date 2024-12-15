@@ -3,6 +3,7 @@ package request_application.request_instance.dynamo.service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,16 @@ import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+
 import static java.lang.Thread.sleep;
 
 @Service
 @RequiredArgsConstructor
 public class FireCrackerService {
     private static final Logger logger = LoggerFactory.getLogger(FireCrackerService.class);
+
+    @Value("${firecracker.port}")
+    private Integer port;
 
     private final FireCrackerRepository fireCrackerRepository;
     private final RestTemplate restTemplate;
@@ -40,7 +45,6 @@ public class FireCrackerService {
                 logger.warn("Version modified, retrying updateRemainingMemory.", e);
             }
         }
-        sleep(2000);
         return requestFireCracker(useInstance, resourceRequest).getData();
     }
 
@@ -76,7 +80,7 @@ public class FireCrackerService {
 
     private URI buildRequestURI(String ip) {
         try {
-            return new URI("http", null, ip, -1, "/request", null, null);
+            return new URI("http", null, ip, port, "/instance-start", null, null);
         } catch (URISyntaxException e) {
             // 예외 처리
             throw new IllegalArgumentException("Invalid IP address: " + ip, e);

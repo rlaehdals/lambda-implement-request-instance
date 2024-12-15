@@ -7,3 +7,6 @@ cloud:
     credentials:
       access-key:
       secret-key:
+
+firecracker:
+  port: 8081

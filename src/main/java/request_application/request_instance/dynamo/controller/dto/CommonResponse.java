@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResourceResponse {
+public class CommonResponse {
     private Object data;
 }
